@@ -139,13 +139,13 @@ public class HostManager : SingletonMonoBehaviour<HostManager>
                 TwitchManager.Get.testMessage = "";
                 break;
 
-            case EventLibrary.ClientEventType.NumericalQuestion:
-                //This will have an array length of [1]
-                p.HandlePlayerScoring(data.Split('|'));
-                SendPayloadToClient(p, EventLibrary.HostEventType.Information, "Answer received");
+            case EventLibrary.ClientEventType.SimpleQuestion:
+                PlayerInputManager.Get.InputReceived(p, data.Split('|').FirstOrDefault());
                 break;
 
-            case EventLibrary.ClientEventType.SimpleQuestion:
+            #region Unused
+
+            /*case EventLibrary.ClientEventType.NumericalQuestion:
                 //This will have an array length of [1]
                 p.HandlePlayerScoring(data.Split('|'));
                 SendPayloadToClient(p, EventLibrary.HostEventType.Information, "Answer received");
@@ -167,7 +167,9 @@ public class HostManager : SingletonMonoBehaviour<HostManager>
                 //This will have an array length of [1] or [2]
                 p.HandlePlayerScoring(data.Split('|'));
                 SendPayloadToClient(p, EventLibrary.HostEventType.Information, "Answer received");
-                break;
+                break;*/
+
+            #endregion
 
             case EventLibrary.ClientEventType.PasteAlert:
                 //Silent alarm indicating some text has been pasted into an answer box
@@ -179,6 +181,16 @@ public class HostManager : SingletonMonoBehaviour<HostManager>
                 {
                     case GameplayManager.Round.None:
                         currentQ = "No live question";
+                        break;
+
+                    case GameplayManager.Round.Round1:
+                    case GameplayManager.Round.Round3:
+                        currentQ = string.Join(" | ", ColumnManager.Get.multiQuestionColumns.Select(x => x.containedQuestion.question));
+                        break;
+
+                    case GameplayManager.Round.Round2:
+                    case GameplayManager.Round.Round4:
+                        currentQ = ColumnManager.Get.singleQuestionColumn.containedQuestion.question;
                         break;
                 }
                 PasteAlertEvent.Log(p, data, currentQ);

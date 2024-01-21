@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class Question
 {
-    public string category;
     public string question;
-    public List<string> validAnswers = new List<string>();
+    public List<string> answers = new List<string>();
 }

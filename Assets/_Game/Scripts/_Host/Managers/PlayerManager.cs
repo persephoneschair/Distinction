@@ -9,9 +9,27 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     public List<PlayerObject> pendingPlayers = new List<PlayerObject>();
     public List<PlayerObject> players = new List<PlayerObject>();
 
-    [Header("Controls")]
+    [Header("Lobby")]
+    public GameObject[] stairsAnimations;
+    public Transform stairsTransformTarget;
+    public SeatedPlayerObject[] seatedPlayerObjects;
+
+    [Header("Editor Controls")]
     public bool pullingData = true;
     [Range(0,39)] public int playerIndex;
+
+    public void InitialisePlayerObject(PlayerObject pl)
+    {
+        pendingPlayers.Remove(pl);
+        players.Add(pl);
+        var x = Instantiate(Extensions.PickRandom(stairsAnimations), stairsTransformTarget);
+        x.GetComponent<StairEntrance>().Initiate(pl.profileImage);
+
+        List<SeatedPlayerObject> vacantSeats = seatedPlayerObjects.Where(x => x.containedPlayer == null).ToList();
+        Extensions.PickRandom(vacantSeats).OnActivate(pl);
+
+        SaveManager.BackUpData();
+    }
 
 
     private PlayerObject _focusPlayer;
@@ -28,12 +46,8 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
                 profileImage = value.profileImage;
                 flagForCondone = value.flagForCondone;
                 wasCorrect = value.wasCorrect;
-                eliminated = value.eliminated;
 
                 points = value.points;
-                totalCorrect = value.totalCorrect;
-                submission = value.submission;
-                submissionTime = value.submissionTime;
             }
             else
             {
@@ -42,7 +56,6 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
                 profileImage = null;
                 flagForCondone = false;
                 wasCorrect = false;
-                eliminated = false;
 
                 points = 0;
                 totalCorrect = 0;
@@ -60,7 +73,6 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     public Texture profileImage;
     [ShowOnly] public bool flagForCondone;
     [ShowOnly] public bool wasCorrect;
-    [ShowOnly] public bool eliminated;
 
     [Header("Variable Fields")]
     public int points;
@@ -104,9 +116,117 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
     void SetDataBack()
     {
         FocusPlayer.points = points;
-        FocusPlayer.totalCorrect = totalCorrect;
-        FocusPlayer.submission = submission;
-        FocusPlayer.submissionTime = submissionTime;
         pullingData = true;
+    }
+
+    public void SendMessageToAllPlayers(string message)
+    {
+        foreach (PlayerObject pl in players)
+            SendMessageToPlayer(message, pl);
+    }
+
+    public void SendMessageToPlayer(string message, PlayerObject pl)
+    {
+        HostManager.Get.SendPayloadToClient(pl, EventLibrary.HostEventType.Information, message);
+    }
+
+    public void SendQuestionToAllNonFinalists(string questionConcat, int halfSecondDelays)
+    {
+        if (halfSecondDelays == 0)
+            SendActionNonFinalists(questionConcat);
+        else
+            StartCoroutine(DelayedSendToAllNonFinalists(questionConcat, halfSecondDelays));
+    }
+
+    IEnumerator DelayedSendToAllNonFinalists(string questionConcat, int halfSecondDelays)
+    {
+        for (int i = halfSecondDelays; i > 0; i--)
+        {
+            foreach (PlayerObject pl in players)
+                SendMessageToPlayer($"Launching in {i}...", pl);
+            yield return new WaitForSeconds(0.5f);
+        }
+        SendActionNonFinalists(questionConcat);
+    }
+
+    public void SendActionNonFinalists(string questionConcat)
+    {
+        foreach (PlayerObject pl in players.Where(x => !x.finalist))
+            SendQuestionToPlayer(questionConcat, pl);
+        foreach (PlayerObject pl in players.Where(x => x.finalist))
+            SendMessageToPlayer(questionConcat.Split('|').FirstOrDefault(), pl);
+    }
+
+    public void SendQuestionToAllPlayers(string questionConcat, int halfSecondDelays)
+    {
+        if(halfSecondDelays == 0)
+        {
+            foreach (PlayerObject pl in players)
+                SendQuestionToPlayer(questionConcat, pl);
+        }
+        else
+            StartCoroutine(DelayedSendToAll(questionConcat, halfSecondDelays));
+    }
+
+    IEnumerator DelayedSendToAll(string questionConcat, int halfSecondDelays)
+    {
+        for(int i = halfSecondDelays; i > 0; i--)
+        {
+            foreach (PlayerObject pl in players)
+                SendMessageToPlayer($"Launching in {i}...", pl);
+            yield return new WaitForSeconds(0.5f);
+        }
+        foreach (PlayerObject pl in players)
+            SendQuestionToPlayer(questionConcat, pl);
+    }
+
+    public void SendQuestionToPlayer(string questionConcat, PlayerObject pl)
+    {
+        HostManager.Get.SendPayloadToClient(pl, EventLibrary.HostEventType.SimpleQuestion, questionConcat);
+    }
+
+    public void UpdatePlayerScores()
+    {
+        foreach (PlayerObject pl in players)
+            UpdatePlayerScore(pl);
+    }
+
+    public void UpdatePlayerScore(PlayerObject pl)
+    {
+        HostManager.Get.SendPayloadToClient(pl, EventLibrary.HostEventType.UpdateScore, $"Points: {pl.points}");
+    }
+
+    public void ResetPlayerVariablesAndLogRoundScore(bool logScore = true)
+    {
+        foreach (PlayerObject pl in players)
+        {
+            pl.submittedAnswers.Clear();
+            pl.flagForCondone = false;
+            pl.wasCorrect = false;
+            if(logScore)
+            {
+                int subtotal = pl.r1Points + pl.r2Points + pl.r3Points + pl.r4Points;
+                switch(GameplayManager.Get.currentRound)
+                {
+                    case GameplayManager.Round.Round1:
+                        pl.r1Points = points - subtotal;
+                        break;
+
+                    case GameplayManager.Round.Round2:
+                        pl.r2Points = points - subtotal;
+                        break;
+
+                    case GameplayManager.Round.Round3:
+                        pl.r3Points = points - subtotal;
+                        break;
+
+                    case GameplayManager.Round.Round4:
+                        if (pl.finalist)
+                            continue;
+                        pl.r4Points = points - subtotal;
+                        break;
+                }
+            }
+        }
     }
 }

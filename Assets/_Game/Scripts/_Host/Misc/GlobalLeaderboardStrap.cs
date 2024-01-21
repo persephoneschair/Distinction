@@ -40,10 +40,10 @@ public class GlobalLeaderboardStrap : MonoBehaviour
         playerNameMesh.text = pl.playerName;
         avatarRend.texture = pl.profileImage;
         totalCorrectMesh.text = pl.points.ToString();
-        if (!isClone)
+        /*if (!isClone)
             pl.strap = this;
         else
-            pl.cloneStrap = this;
+            pl.cloneStrap = this;*/
     }
 
     public void SetBackgroundColor(bool hotseat)

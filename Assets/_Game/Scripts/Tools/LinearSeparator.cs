@@ -20,10 +20,10 @@ namespace ATB
 
         private void Update()
         {
-            if (Application.isPlaying)
+            /*if (Application.isPlaying)
             {
                 return;
-            }
+            }*/
 
             int childCount = transform.childCount;
             Vector3 localRoot = Vector3.zero;

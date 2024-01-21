@@ -5,16 +5,57 @@ using UnityEngine;
 
 public class AudioManager : SingletonMonoBehaviour<AudioManager>
 {
-
+    public AudioSource findAnswerSource;
     public AudioSource oneShotSource;
     public AudioSource loopingSource;
 
     private bool playedUnique;
 
-    public enum OneShotClip { Impact, PodiumAnim, ClockTick, PlayerAnswer, WrongInFinal, ClockArm, Rotation, QStartAndEnd, PointTick };
+    public enum FindAnswerClip
+    {
+        Wow,
+        Boing,
+        Bwoing,
+        CashRegister,
+        Clown,
+        CorrectAnswer,
+        Party,
+        SqueakOnce,
+        SqueakToy,
+        Timp,
+        Yay,
+
+        Pop1,
+        Pop2,
+        Pop3,
+        Pop4
+    }
+    public AudioClip[] findAnswer;
+
+    public enum OneShotClip
+    {
+        BoardTurn,
+        CameraFlash,
+        Correct,
+        PointDrain,
+        Tick,
+        TimeUp,
+        Wheee,
+        WrongAnswerReveal,
+        FlyIn,
+        PlayerLandsInSeat
+    };
     public AudioClip[] stings;
 
-    public enum LoopClip { Titles, GameplayLoop, WinTheme, Credits };
+    public enum LoopClip
+    {
+        Titles,
+        Lobby,
+        R1R3R4,
+        R2,
+        EndOfRound,
+        Credits
+    };
     public AudioClip[] loops;
 
     #region Public Methods
@@ -53,6 +94,13 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
             loopingSource.Play();
         }
     }
+    public void Play(FindAnswerClip find, float delay = 0f)
+    {
+        if (delay != 0f)
+            StartCoroutine(Delay(find, delay));
+        else
+            findAnswerSource.PlayOneShot(findAnswer[(int)find]);
+    }
 
     public void Fade()
     {
@@ -66,6 +114,11 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     private void CancelUnique()
     {
         playedUnique = false;
+    }
+    private IEnumerator Delay(FindAnswerClip oneShot, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Play(oneShot, 0f);
     }
 
     private IEnumerator Delay(OneShotClip oneShot, float delay)

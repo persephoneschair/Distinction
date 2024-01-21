@@ -1,0 +1,153 @@
+{
+  "author": "lewist1",
+  "questions": [
+    {
+      "question": "Words on the buttons to the left of 'Help' on Microsoft Word 2019's top ribbon",
+      "answers": [
+        "File",
+        "Home",
+        "Insert",
+        "Draw",
+        "Design",
+        "Layout",
+        "References",
+        "Mailings",
+        "Review",
+        "View"
+      ]
+    },
+    {
+      "question": "Films for which Susan Sarandon or Nicole Kidman were nominated for a Best (Supporting) Actress Oscar",
+      "answers": [
+        "Atlantic City",
+        "Thelma & Louise,Thelma and Louise",
+        "Lorenzo's Oil,Lorenzos Oil",
+        "The Client",
+        "Dead Man Walking",
+        "Moulin Rouge!,Moulin Rouge",
+        "The Hours",
+        "Rabbit Hole",
+        "Lion",
+        "Being The Ricardos"
+      ]
+    },
+    {
+      "question": "Letters that are used exactly once or twice in this prompt",
+      "answers": [
+        "L",
+        "H",
+        "N",
+        "P",
+        "U",
+        "D",
+        "X",
+        "Y",
+        "W",
+        "M"
+      ]
+    },
+    {
+      "question": "Named ingredients in BBC Good Food's 'Chocolate Swiss roll' recipe that are NOT sugar",
+      "answers": [
+        "Flour,Self-raising flour,SR flour,self raising flour",
+        "Cocoa powder,Cocoa",
+        "Eggs,Egg",
+        "Double cream,Cream",
+        "Vanilla,Vanilla extract"
+      ]
+    },
+    {
+      "question": "First names of human Griffin family members seen in the 'Family Guy' opening titles",
+      "answers": [
+        "Lois",
+        "Peter,Justin",
+        "Meg,Megatron,Megan",
+        "Chris,Christopher",
+        "Stewie,Stewart"
+      ]
+    },
+    {
+      "question": "Colours other than grey used in Piet Mondrian's painting 'Composition A'",
+      "answers": [
+        "Black",
+        "Blue",
+        "Red",
+        "White",
+        "Yellow"
+      ]
+    },
+    {
+      "question": "German cities that feature in the names of the 2022-23 Bundesliga teams",
+      "answers": [
+        "Augsburg",
+        "Bochum",
+        "Dortmund",
+        "Frankfurt",
+        "Köln,Cologne",
+        "Leipzig",
+        "Leverkusen",
+        "Mainz",
+        "Stuttgart",
+        "Wolfsburg"
+      ]
+    },
+    {
+      "question": "Papal names used by at least 3 Popes of the Catholic Church",
+      "answers": [
+        "Benedict",
+        "Innocent",
+        "Pius",
+        "Urban",
+        "Adrian",
+        "Sixtus ",
+        "Felix",
+        "Julius",
+        "Sylvester",
+        "Victor"
+      ]
+    },
+    {
+      "question": "Words of 5 or more letters in the lyrics of the Killers' song 'Mr Brightside'",
+      "answers": [
+        "Started",
+        "Asleep",
+        "Smoke",
+        "Touching",
+        "Taking",
+        "Jealousy",
+        "Saints",
+        "Choking",
+        "Eager",
+        "Never"
+      ]
+    },
+    {
+      "question": "Chemical elements whose symbols ONLY use the first 10 letters of the English alphabet (A-J)",
+      "answers": [
+        "Actinium",
+        "Silver",
+        "Boron",
+        "Barium",
+        "Beryllium",
+        "Bohrium",
+        "Bismuth",
+        "Carbon",
+        "Calcium",
+        "Cadmium",
+        "Cerium",
+        "Californium",
+        "Dubnium",
+        "Fluorine",
+        "Iron",
+        "Gallium",
+        "Gadolinium",
+        "Germanium",
+        "Hydrogen",
+        "Helium",
+        "Hafnium",
+        "Mercury",
+        "Iodine"
+      ]
+    }
+  ]
+}

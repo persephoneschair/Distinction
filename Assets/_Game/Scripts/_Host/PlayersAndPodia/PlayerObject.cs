@@ -13,20 +13,26 @@ public class PlayerObject
     public string otp;
     public string playerName;
 
-    public GlobalLeaderboardStrap strap;
-    public GlobalLeaderboardStrap cloneStrap;
+    public SeatedPlayerObject seat = null;
 
     public string twitchName;
     public Texture profileImage;
 
-    public bool eliminated;
+    public int r1Points;
+    public int r2Points;
+    public int r3Points;
+    public int r4Points;
+    public bool finalist;
 
+    public List<string> submittedAnswers = new List<string>();
     public int points;
-    public int totalCorrect;
-    public string submission;
-    public float submissionTime;
+    public string currentPositionString;
     public bool flagForCondone;
     public bool wasCorrect;
+
+    public int pennysWon = 0;
+    public int medalStatus = 0;
+    //0 = none, 1 = gold, 2 = silver, 3 = bronze, 4 = lobby
 
     public PlayerObject(Player pl, string name)
     {
@@ -34,8 +40,17 @@ public class PlayerObject
         otp = OTPGenerator.GenerateOTP();
         playerName = name;
         points = 0;
-        //podium = Podiums.GetPodiums.podia.FirstOrDefault(x => x.containedPlayer == null);
-        //podium.containedPlayer = this;
+    }
+
+    public PlayerObject(string dummyPlayer)
+    {
+        string[] x = dummyPlayer.Split('|');
+        playerName = x[0];
+        if (int.TryParse(x[1], out int val))
+            points = val;
+        else
+            submittedAnswers.Add(x[1]);
+        profileImage = ColumnManager.Get.incorrectTexture;
     }
 
     public void ApplyProfilePicture(string name, Texture tx, bool bypassSwitchAccount = false)
@@ -63,15 +78,14 @@ public class PlayerObject
             if (PlayerManager.Get.pendingPlayers.Contains(this))
                 PlayerManager.Get.pendingPlayers.Remove(this);
 
-            HostManager.Get.SendPayloadToClient(oldPlayer, EventLibrary.HostEventType.Validated, $"{oldPlayer.playerName}|{oldPlayer.points.ToString()}|{oldPlayer.twitchName}");
+            HostManager.Get.SendPayloadToClient(oldPlayer, EventLibrary.HostEventType.Validated, $"{oldPlayer.playerName}|Points: {oldPlayer.points.ToString()}|{oldPlayer.twitchName}");
             //HostManager.Get.UpdateLeaderboards();
             return;
         }
         otp = "";
         twitchName = name.ToLowerInvariant();
         profileImage = tx;
-        //podium.avatarRend.material.mainTexture = profileImage;
-        if(!LobbyManager.Get.lateEntry)
+        /*if(!LobbyManager.Get.lateEntry)
         {
             //podium.InitialisePodium();
         }
@@ -79,21 +93,8 @@ public class PlayerObject
         {
             points = 0;
             eliminated = true;
-        }
-        HostManager.Get.SendPayloadToClient(this, EventLibrary.HostEventType.Validated, $"{playerName}|{points.ToString()}|{twitchName}");
-        PlayerManager.Get.players.Add(this);
-        PlayerManager.Get.pendingPlayers.Remove(this);
-        LeaderboardManager.Get.PlayerHasJoined(this);
-        SaveManager.BackUpData();
-        //HostManager.GetHost.UpdateLeaderboards();
-    }
-
-    public void HandlePlayerScoring(string[] submittedAnswers)
-    {
-        switch(GameplayManager.Get.currentRound)
-        {
-            default:
-                break;
-        }
+        }*/
+        HostManager.Get.SendPayloadToClient(this, EventLibrary.HostEventType.Validated, $"{playerName}|Points: {points.ToString()}|{twitchName}");
+        PlayerManager.Get.InitialisePlayerObject(this);
     }
 }

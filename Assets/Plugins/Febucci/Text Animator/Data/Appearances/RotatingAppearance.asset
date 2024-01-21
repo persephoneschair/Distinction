@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RotatingAppearance
   m_EditorClassIdentifier: 
   tagID: rot
-  baseDuration: 0.7
-  baseTargetAngle: 50
+  baseDuration: 1
+  baseTargetAngle: 45

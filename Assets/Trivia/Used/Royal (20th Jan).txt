@@ -1,0 +1,164 @@
+{
+  "author": "",
+  "questions": [
+    {
+      "question": "Name a film in Phase 3 of the Marvel Cinematic Universe",
+      "answers": [
+        "Captain America: Civil War,Civil War",
+        "Doctor Strange,Dr Strange",
+        "Guardians of the Galaxy Vol. 2,Guardians of the Galaxy Volume 2,Guardians of the Galaxy 2,Guardians 2",
+        "Spider-Man: Homecoming,Spider-Man Homecoming,Homecoming",
+        "Thor: Ragnarok,Thor 3,Ragnarok",
+        "Black Panther",
+        "Avengers: Infinity War,Infinity War",
+        "Ant-Man and the Wasp",
+        "Captain Marvel",
+        "Avengers: Endgame,Endgame",
+        "Spider-Man: Far From Home,Spider-Man Far From Home,Far From Home"
+      ]
+    },
+    {
+      "question": "Name a room you can enter on a standard Cluedo board",
+      "answers": [
+        "Hall",
+        "Lounge",
+        "Dining Room",
+        "Kitchen",
+        "Ballroom",
+        "Conservatory",
+        "Billiard Room,Billiards Room",
+        "Library",
+        "Study"
+      ]
+    },
+    {
+      "question": "Name a chemical element that begins with L or G",
+      "answers": [
+        "Gadolinium",
+        "Gallium",
+        "Germanium",
+        "Gold",
+        "Lanthanum",
+        "Lawrencium",
+        "Lead",
+        "Lithium",
+        "Livermorium",
+        "Lutetium"
+      ]
+    },
+    {
+      "question": "Name an actor or actress who has had FIRST billing in a televised episode of Doctor Who since 2005",
+      "answers": [
+        "Christopher Eccleston,Chris Eccleston,Eccleston",
+        "David Tennant,Tennant",
+        "Matt Smith,Smith",
+        "Peter Capaldi,Capaldi",
+        "Jodie Whittaker,Whittaker",
+        "Ncuti Gatwa,Gatwa",
+        "Jenna Coleman,Coleman,Jenna Coleman,Jenna Louise Coleman"
+      ]
+    },
+    {
+      "question": "Name somebody who has been Leader of the Labour Party but NOT Prime Minister since 1980",
+      "answers": [
+        "Sir Keir Starmer,Keir Starmer,Starmer",
+        "Jeremy Corbyn,Corbyn",
+        "Harriet Harman,Harman",
+        "Ed Miliband,Miliband",
+        "Margaret Beckett,Beckett",
+        "John Smith,Smith",
+        "Neil Kinnock,Kinnock",
+        "Michael Foot,Foot"
+      ]
+    },
+    {
+      "question": "Name an action you can perform on Hasbro Gaming's 'Bop It Extreme 2'",
+      "answers": [
+        "Bop It",
+        "Twist It",
+        "Pull It",
+        "Flick It",
+        "Spin It"
+      ]
+    },
+    {
+      "question": "Name a book of the Old Testament of the King James Bible",
+      "answers": [
+        "Genesis",
+        "Judges",
+        "Ruth",
+        "Nehemiah",
+        "Psalms",
+        "Exekiel",
+        "Song of Songs,Song of Soloman,The Song of Songs",
+        "Daniel",
+        "Amos",
+        "Habakkuk"
+      ]
+    },
+    {
+      "question": "Name a Shakespeare play from the First Folio",
+      "answers": [
+        "The Tempest",
+        "The Comedy of Errors",
+        "The Taming of the Shrew",
+        "King John",
+        "Richard III",
+        "Troilus and Cressida",
+        "Coriolanus",
+        "Titus Andronicus",
+        "Hamlet",
+        "Cymbeline"
+      ]
+    },
+    {
+      "question": "Name a video game that has won the D.I.C.E Award for Game of the Year",
+      "answers": [
+        "The Sims",
+        "Half-Life 2",
+        "God of War",
+        "Gears of War",
+        "LittleBigPlanet",
+        "The Elder Scrolls V: Skyrim,Skyrim,Elder Scrolls V",
+        "Fallout 4",
+        "The Legend of Zelda: Breath of the Wild,Breath of the Wild,Zelda Breath of the Wild,LoZ Breath of the Wild",
+        "Untitled Goose Game",
+        "Elden Ring"
+      ]
+    },
+    {
+      "question": "Name any original quiz or game show format by Persephone's Chair that have been played on Twitch and require a host",
+      "answers": [
+        "DangerZone",
+        "The Gauntlet",
+        "Google That!,Google That,Google That Too",
+        "The Escape Artist,Escape Artist",
+        "The Purge,Purge",
+        "Red Herrings!,Red Herrings",
+        "Bidding War",
+        "Deciphered",
+        "Risky Business",
+        "Face/Off,Face Off,FaceOff",
+        "Cryptex",
+        "The Pyramid,Pyramid",
+        "The Gatekeeper,Gatekeeper",
+        "Spotlight",
+        "Buzz Off!,Buzz Off",
+        "That Is The Question",
+        "The Abyss",
+        "Data Leak",
+        "Showdown",
+        "Moneybox",
+        "The Arena,Arena",
+        "The Hive,Hive",
+        "Venn",
+        "The Bridge,Bridge",
+        "Distinction!,Distinction",
+        "Pub Quiz,Pub Quiz App",
+        "The Mole,Mole",
+        "The Pod,Pod",
+        "Dealer's Den"
+      ]
+    }
+  ]
+}

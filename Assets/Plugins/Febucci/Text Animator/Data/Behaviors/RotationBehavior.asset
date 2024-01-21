@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RotationBehavior
   m_EditorClassIdentifier: 
   tagID: rot
-  baseRotSpeed: 180
-  baseDiffBetweenChars: 10
+  baseRotSpeed: 360
+  baseDiffBetweenChars: 20

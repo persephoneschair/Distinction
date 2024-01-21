@@ -169,6 +169,11 @@ public static class Extensions
         return false;
     }
 
+    public static double Spellchecker(string input, string correctAnswer)
+    {
+        return input.ToLowerInvariant().CalculateSimilarity(correctAnswer.ToLowerInvariant());
+    }
+
     public static bool IsPrime(this int n)
     {
         if (n == 2 || n == 3)

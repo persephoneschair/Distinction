@@ -7,7 +7,12 @@ public class CameraLerpManager : SingletonMonoBehaviour<CameraLerpManager>
 {
     private Camera cam;
 
-    public enum CameraPosition { Default };
+    public enum CameraPosition
+    {
+        Aerial,
+        MergeToAudience
+    };
+
     public Transform[] angles;
     public float defaultFieldOfView = 60f;
     public float defaultTransitionDuration = 2f;
@@ -32,6 +37,24 @@ public class CameraLerpManager : SingletonMonoBehaviour<CameraLerpManager>
     #endregion
 
     #region Public Functions
+
+    public void ForceSwitchToAudience(float delay)
+    {
+        Invoke("InvokeForceSwitchToAudience", delay);
+    }
+
+    public void ForceSwitchToFloating(bool panOut)
+    {
+        CameraManager.Get.CurrentCam = CameraManager.CameraAngle.Floating;
+        if (panOut)
+            ZoomToPosition(CameraPosition.Aerial, 80f, 5f);
+    }
+
+    private void InvokeForceSwitchToAudience()
+    {
+        CameraManager.Get.CurrentCam = CameraManager.CameraAngle.Audience;
+        //ZoomToPosition(CameraPosition.Aerial, 80f, 1f);
+    }
 
     public void ZoomToPosition(CameraPosition target, float fov, float transitionDuration)
     {

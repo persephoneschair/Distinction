@@ -25,7 +25,7 @@ public class ScoreboardManager : SingletonMonoBehaviour<ScoreboardManager>
     {
         //This is horrible and forced me to split the points per round into individual variables
         //May be possible to `ThenByDescending` over a List<int> but couldn't work it out :(
-        //Not the scoreboard will still display `=4th` for anybody with the same points
+        //Note the scoreboard will still display `=4th` for anybody with the same points
 
         return testList == null ? PlayerManager.Get.players
             .OrderByDescending(x => x.points)
@@ -86,7 +86,10 @@ public class ScoreboardManager : SingletonMonoBehaviour<ScoreboardManager>
 
             //Transition cam back to audience at end of board sequence
             if (overlap >= pl.Count)
+            {
+                yield return new WaitForSeconds(3f);
                 GameplayManager.Get.OnScoreboardFinished();
+            }                
         }
         for (int i = overlap; i > 0; i--)
             straps[straps.Length - i].ClearStrap();
@@ -107,7 +110,10 @@ public class ScoreboardManager : SingletonMonoBehaviour<ScoreboardManager>
 
             //Transition cam back to audience at end of board sequence
             if (gone + straps.Length >= pl.Count)
+            {
+                yield return new WaitForSeconds(3f);
                 GameplayManager.Get.OnScoreboardFinished();
+            }                
 
             foreach (ScoreboardStrap s in straps)
                 s.anim.SetTrigger("clear");

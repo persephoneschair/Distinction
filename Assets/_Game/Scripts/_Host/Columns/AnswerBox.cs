@@ -68,6 +68,7 @@ public class AnswerBox : MonoBehaviour
         if (flaggedForReveal)
         {
             finder.points += GameplayManager.Get.currentConfig.pointsForSecondary;
+            finder.closeSubmittedAnswers.Add(validAnswers.FirstOrDefault());
             return;
         }
         else

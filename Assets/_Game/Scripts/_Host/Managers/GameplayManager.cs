@@ -126,7 +126,6 @@ public class GameplayManager : SingletonMonoBehaviour<GameplayManager>
                         break;
 
                 }
-                //Audio sting
                 break;
 
             ///---///
@@ -142,7 +141,6 @@ public class GameplayManager : SingletonMonoBehaviour<GameplayManager>
 
             case GameplayStage.RevealMissingAnswers:
                 ColumnManager.Get.RevealAllAnswersMultiple();
-                //SFX
                 currentStage = GameplayStage.EndRound;
                 break;
 
@@ -235,6 +233,7 @@ public class GameplayManager : SingletonMonoBehaviour<GameplayManager>
             ///---///
 
             case GameplayStage.EndRound:
+                AudioManager.Get.Play(AudioManager.LoopClip.Lobby, true);
                 CameraManager.Get.TransitionCam(CameraManager.CameraAngle.Scores);
                 PlayerManager.Get.ResetPlayerVariablesAndLogRoundScore();
                 currentStage++;
@@ -272,7 +271,13 @@ public class GameplayManager : SingletonMonoBehaviour<GameplayManager>
         {
             case Round.Round1:
             case Round.Round3:
-                PlayerManager.Get.SendMessageToAllPlayers("TIME UP!\nThat's the end of the round");
+                //$"You've found {GameplayManager.Get.currentConfig.maximumAnswers} answers! Good job!\n<i>{string.Join("\n", player.submittedAnswers)}</i>"
+                foreach (PlayerObject pl in PlayerManager.Get.players)
+                {
+                    string fullAnswers = pl.submittedAnswers.Count > 0 ? $"\n\n<color=green>FOUND:</color>\n<i>{string.Join("\n", pl.submittedAnswers)}</i>" : "";
+                    string closeAnswers = pl.closeSubmittedAnswers.Count > 0 ? $"\n\n<color=orange>NEARLY FOUND:</color>\n<i>{string.Join("\n", pl.closeSubmittedAnswers)}</i>" : "";
+                    PlayerManager.Get.SendMessageToPlayer($"TIME UP!{fullAnswers}{closeAnswers}", pl);
+                }
                 currentStage = GameplayStage.RevealMissingAnswers;
                 break;
 

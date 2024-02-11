@@ -25,6 +25,7 @@ public class PlayerObject
     public bool finalist;
 
     public List<string> submittedAnswers = new List<string>();
+    public List<string> closeSubmittedAnswers = new List<string>();
     public int points;
     public string currentPositionString;
     public bool flagForCondone;

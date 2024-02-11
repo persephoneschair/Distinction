@@ -14,6 +14,7 @@ public static class EventLibrary
         SecondInstance,
 
         Information,
+        DoubleInformation,
         UpdateScore,
 
         SimpleQuestion,

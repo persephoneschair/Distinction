@@ -74,12 +74,12 @@ public class PlayerInputManager : SingletonMonoBehaviour<PlayerInputManager>
             ax.FlagAnswerAsFound(player);
             PlayerManager.Get.UpdatePlayerScore(player);
             if (!beatenToThePunch)
-                PlayerManager.Get.SendMessageToPlayer($"<color=green>CORRECT</color>\nYou've got {player.submittedAnswers.Count}/{GameplayManager.Get.currentConfig.maximumAnswers}:\n<i>{string.Join("\n", player.submittedAnswers)}</i>", player);
+                PlayerManager.Get.SendMessageToPlayer(QuestionManager.GetMultiQuestionString(), $"<color=green>CORRECT</color>\nYou've got {player.submittedAnswers.Count}/{GameplayManager.Get.currentConfig.maximumAnswers}:\n<i>{string.Join("\n", player.submittedAnswers)}</i>", player);
             else
-                PlayerManager.Get.SendMessageToPlayer($"<color=orange>CORRECT</color>\n<size=50%>(but someone <i>JUST</i> beat you to it!)</size>\nYou've got {player.submittedAnswers.Count}/{GameplayManager.Get.currentConfig.maximumAnswers}:\n<i>{string.Join("\n", player.submittedAnswers)}</i>", player);
+                PlayerManager.Get.SendMessageToPlayer(QuestionManager.GetMultiQuestionString(), $"<color=orange>CORRECT</color>\n<size=50%>(but someone <i>JUST</i> beat you to it!)</size>\nYou've got {player.submittedAnswers.Count}/{GameplayManager.Get.currentConfig.maximumAnswers}:\n<i>{string.Join("\n", player.submittedAnswers)}</i>", player);
         }
         else
-            PlayerManager.Get.SendMessageToPlayer($"<color=red>INCORRECT, REPEAT OR ALREADY FOUND</color>\nYou've got {player.submittedAnswers.Count}/{GameplayManager.Get.currentConfig.maximumAnswers}:\n<i>{string.Join("\n", player.submittedAnswers)}</i>", player);
+            PlayerManager.Get.SendMessageToPlayer(QuestionManager.GetMultiQuestionString(), $"<color=red>INCORRECT, REPEAT OR ALREADY FOUND</color>\nYou've got {player.submittedAnswers.Count}/{GameplayManager.Get.currentConfig.maximumAnswers}:\n<i>{string.Join("\n", player.submittedAnswers)}</i>", player);
 
         StartCoroutine(DelayInterfaceReturnR1R3(player));
     }
@@ -200,7 +200,11 @@ public class PlayerInputManager : SingletonMonoBehaviour<PlayerInputManager>
                 PlayerManager.Get.SendMessageToPlayer($"You've found {GameplayManager.Get.currentConfig.maximumAnswers} answers! Good job!\n<i>{string.Join("\n", player.submittedAnswers)}</i>", player);
             }                
             else
-                PlayerManager.Get.SendQuestionToPlayer(R4PodiumManager.Get.finalQuestion.question + $"|{(GlobalTimeManager.Get.GetIntTimeRemaining() - 1)}", player);
+            {
+                string foundAnswers = player.submittedAnswers.Count > 0 ? "\n\n<color=green>FOUND:</color>\n" + string.Join("\n", player.submittedAnswers) : "";
+                PlayerManager.Get.SendQuestionToPlayer(R4PodiumManager.Get.finalQuestion.question + foundAnswers + $"|{(GlobalTimeManager.Get.GetIntTimeRemaining() - 1)}", player);
+            }
+                
         }
     }
 

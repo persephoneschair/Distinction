@@ -86,12 +86,12 @@ public class CreditsManager : SingletonMonoBehaviour<CreditsManager>
         creds += "\n\n\n\n<size=175%><color=red>D<color=green>I<color=blue>S<color=yellow>T<color=orange>I<color=purple>N<color=white>C<color=red>T<color=green>I<color=blue>O<color=yellow>N<color=orange>!<color=white>";
         creditsMesh.text = creds;
 
-        if (storedScreenshots.Count >= photoRends.Length)
+        /*if (storedScreenshots.Count >= photoRends.Length)
             foreach (RawImage ri in photoRends)
             {
                 var x = Extensions.PickRandom(storedScreenshots);
                 ri.texture = x;
                 storedScreenshots.Remove(x);
-            }
+            }*/
     }
 }

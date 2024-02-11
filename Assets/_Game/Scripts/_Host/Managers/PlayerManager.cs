@@ -130,6 +130,12 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         HostManager.Get.SendPayloadToClient(pl, EventLibrary.HostEventType.Information, message);
     }
 
+    public void SendMessageToPlayer(string primaryMessage, string secondaryMessage, PlayerObject pl)
+    {
+        string payload = string.Join("|", primaryMessage, secondaryMessage);
+        HostManager.Get.SendPayloadToClient(pl, EventLibrary.HostEventType.DoubleInformation, payload);
+    }
+
     public void SendQuestionToAllNonFinalists(string questionConcat, int halfSecondDelays)
     {
         if (halfSecondDelays == 0)
@@ -201,6 +207,7 @@ public class PlayerManager : SingletonMonoBehaviour<PlayerManager>
         foreach (PlayerObject pl in players)
         {
             pl.submittedAnswers.Clear();
+            pl.closeSubmittedAnswers.Clear();
             pl.flagForCondone = false;
             pl.wasCorrect = false;
             if(logScore)

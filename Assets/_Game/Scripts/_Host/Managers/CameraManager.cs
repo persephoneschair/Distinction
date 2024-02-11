@@ -45,14 +45,15 @@ public class CameraManager : SingletonMonoBehaviour<CameraManager>
 
     IEnumerator RecordFrame(CameraAngle newAngle)
     {
-        yield return new WaitForEndOfFrame();
+        /*yield return new WaitForEndOfFrame();
         var texture = ScreenCapture.CaptureScreenshotAsTexture();
-        transitionImage.texture = texture;
+        transitionImage.texture = texture;*/
 
         transitionAnim.SetTrigger("toggle");
+        yield return new WaitForSeconds(1f);
         CurrentCam = newAngle;
 
-        CreditsManager.Get.storedScreenshots.Add(texture);
+        //CreditsManager.Get.storedScreenshots.Add(texture);
 
 
         // cleanup
@@ -61,9 +62,10 @@ public class CameraManager : SingletonMonoBehaviour<CameraManager>
 
     public void TransitionCam(CameraAngle newAngle)
     {
-        AudioManager.Get.Play(AudioManager.OneShotClip.CameraFlash);
-        AudioManager.Get.Play(AudioManager.OneShotClip.FlyIn, 0.5f);
-        AudioManager.Get.Play(AudioManager.OneShotClip.Wheee, 1f);
+        AudioManager.Get.Play(AudioManager.OneShotClip.PlayerLandsInSeat, 0.25f);
+        AudioManager.Get.Play(AudioManager.OneShotClip.PointDrain, 1f);
+        //AudioManager.Get.Play(AudioManager.OneShotClip.FlyIn, 0.5f);
+        AudioManager.Get.Play(AudioManager.OneShotClip.Wheee, 2f);
         StartCoroutine(RecordFrame(newAngle));
     }
 
